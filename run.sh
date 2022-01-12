@@ -44,13 +44,27 @@ main() {
   if [ -n "$WERCKER_KUBECTL_CERTIFICATE_AUTHORITY" ]; then
     global_args="$global_args --certificate-authority=\"$WERCKER_KUBECTL_CERTIFICATE_AUTHORITY\""
   fi
+  if [ -n "$WERCKER_KUBECTL_CERTIFICATE_AUTHORITY_DATA" ]; then
+    echo $WERCKER_KUBECTL_CERTIFICATE_AUTHORITY_DATA > tmpcertauth
+    global_args="$global_args --client-certificate=\"tmpcertauth\""
+  fi
+
     # client-certificate
   if [ -n "$WERCKER_KUBECTL_CLIENT_CERTIFICATE" ]; then
     global_args="$global_args --client-certificate=\"$WERCKER_KUBECTL_CLIENT_CERTIFICATE\""
   fi
+  if [ -n "$WERCKER_KUBECTL_CLIENT_CERTIFICATE_DATA" ]; then
+    echo $WERCKER_KUBECTL_CLIENT_CERTIFICATE_DATA > tmpclicert
+    global_args="$global_args --client-certificate=\"tmpclicert\""
+  fi
+
     # client-key
   if [ -n "$WERCKER_KUBECTL_CLIENT_KEY" ]; then
     global_args="$global_args --client-key=\"$WERCKER_KUBECTL_CLIENT_KEY\""
+  fi
+  if [ -n "$WERCKER_KUBECTL_CLIENT_KEY_DATA" ]; then
+    echo $WERCKER_KUBECTL_CLIENT_KEY_DATA > tmpclikey
+    global_args="$global_args --client-key=\"tmpclikey\""
   fi
 
   # Command specific flags
