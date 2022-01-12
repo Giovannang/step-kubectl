@@ -176,6 +176,13 @@ main() {
     args="$args --overwrite=\"$WERCKER_KUBECTL_OVERWRITE\""
   fi
 
+  # kubeconfig File
+  if [ -n "$WERCKER_KUBECTL_KUBE_FILE" ]; then
+    args="$args --kubeconfig=\"$WERCKER_KUBECTL_KUBE_FILE\""
+  fi
+
+
+
 
   info "Running kubctl command"
   if [ "$WERCKER_KUBECTL_DEBUG" = "true" ]; then
