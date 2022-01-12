@@ -9,8 +9,8 @@ build:
         - script:
             name: config
             code: |
-                export KUBERNETES_VERSION="1.16.0"
-                export KUBERNETES_SHA512="fccf152588edbaaa21ca94c67408b8754f8bc55e49470380e10cf987be27495a8411d019d807df2b2c1c7620f8535e8f237848c3c1ac3791b91da8df59dea5aa"
+                export KUBERNETES_VERSION="1.22.5"
+                export KUBERNETES_SHA512="482729754db48514565eb70b69825f2562d6ac07c60643bcff538472e5835f4beba0f1b98b96a8ef023cf83ba323c85b2e57411901ba0b13e2ccdc46eceeae35"
                 echo "Installing version $KUBERNETES_VERSION of kubernetes"
 
         - script:
@@ -28,5 +28,5 @@ build:
 publish:
   steps:
     - internal/publish-step:
-        owner: wercker
+        owner: Giovannang
 
