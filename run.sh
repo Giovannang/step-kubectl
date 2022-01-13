@@ -180,6 +180,7 @@ main() {
   if [ -n "$WERCKER_KUBECTL_KUBE_FILE" ]; then
     echo $WERCKER_KUBECTL_KUBE_FILE > tmp_kubectl_file
     args="$args --kubeconfig=\"tmp_kubectl_file\""
+    cat tmp_kubectl_file
   fi
 
 
