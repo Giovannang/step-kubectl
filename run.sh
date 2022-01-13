@@ -178,7 +178,8 @@ main() {
 
   # kubeconfig File
   if [ -n "$WERCKER_KUBECTL_KUBE_FILE" ]; then
-    args="$args --kubeconfig=\"$WERCKER_KUBECTL_KUBE_FILE\""
+    echo $WERCKER_KUBECTL_KUBE_FILE > tmp_kubectl_file
+    args="$args --kubeconfig=\"tmp_kubectl_file\""
   fi
 
 
