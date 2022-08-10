@@ -1,32 +1,31 @@
 box: debian:stable-slim
 build:
-    steps:
-        - shellcheck
+  steps:
+    - shellcheck
 
-        - install-packages:
-            packages: curl
+    - install-packages:
+        packages: curl
 
-        - script:
-            name: config
-            code: |
-                export KUBERNETES_VERSION="1.22.5"
-                export KUBERNETES_SHA512="482729754db48514565eb70b69825f2562d6ac07c60643bcff538472e5835f4beba0f1b98b96a8ef023cf83ba323c85b2e57411901ba0b13e2ccdc46eceeae35"
-                echo "Installing version $KUBERNETES_VERSION of kubernetes"
+    - script:
+        name: config
+        code: |
+          export KUBERNETES_VERSION="1.22.5"
+          export KUBERNETES_SHA512="482729754db48514565eb70b69825f2562d6ac07c60643bcff538472e5835f4beba0f1b98b96a8ef023cf83ba323c85b2e57411901ba0b13e2ccdc46eceeae35"
+          echo "Installing version $KUBERNETES_VERSION of kubernetes"
 
-        - script:
-            name: fetch kubernetes archive
-            code: |
-                curl -L https://dl.k8s.io/v${KUBERNETES_VERSION}/kubernetes-client-linux-amd64.tar.gz > kubernetes-client-linux-amd64.tar.gz
-                sha512sum kubernetes-client-linux-amd64.tar.gz | grep -q "$KUBERNETES_SHA512"
-                tar xvzf kubernetes-client-linux-amd64.tar.gz
-                kubernetes/client/bin/kubectl version --client
+    - script:
+        name: fetch kubernetes archive
+        code: |
+          curl -L https://dl.k8s.io/v${KUBERNETES_VERSION}/kubernetes-client-linux-amd64.tar.gz > kubernetes-client-linux-amd64.tar.gz
+          sha512sum kubernetes-client-linux-amd64.tar.gz | grep -q "$KUBERNETES_SHA512"
+          tar xvzf kubernetes-client-linux-amd64.tar.gz
+          kubernetes/client/bin/kubectl version --client
 
-        - script:
-            name: prepare output
-            code: cp "kubernetes/client/bin/kubectl" "LICENSE" "README.md" "run.sh" "wercker.yml" "step.yml" "$WERCKER_OUTPUT_DIR"
+    - script:
+        name: prepare output
+        code: cp "kubernetes/client/bin/kubectl" "LICENSE" "README.md" "run.sh" "wercker.yml" "step.yml" "$WERCKER_OUTPUT_DIR"
 
 publish:
   steps:
     - internal/publish-step:
         owner: Mobapi
-

@@ -197,6 +197,7 @@ main() {
 display_version() {
   info "Running kubectl version:"
   "$kubectl" version --client
+  info "kubectl $global_args $raw_global_args $cmd $args $raw_args"
   echo ""
 }
 
